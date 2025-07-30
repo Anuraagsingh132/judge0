@@ -1,14 +1,13 @@
 #!/bin/bash
-# Script for running Judge0 server on Render
 
 # Load environment variables
 source ./scripts/load-config
 
-# Create and seed database
+# Prepare the database
 bundle exec rails db:create db:migrate db:seed
 
-# Remove old pid file if exists
+# Remove old PID if exists
 rm -f tmp/pids/server.pid
 
-# Start server on Render’s required port
+# Start server on the correct port
 exec bundle exec rails server -b 0.0.0.0 -p ${PORT:-8080}
